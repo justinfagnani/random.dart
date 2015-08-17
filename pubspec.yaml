@@ -1,0 +1,9 @@
+name: random
+version: 0.0.1-dev1
+description: Random number utilities
+author: Justin Fagnani <justin@fagnani.com>
+homepage: https://github.com/justinfagnani/random.dart
+dev_dependencies:
+  test: "^0.12.0"
+environment:
+  sdk: "1.12.0"

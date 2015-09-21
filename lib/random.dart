@@ -70,3 +70,30 @@ List<int> permutation(int size, {Random random}) {
   }
   return list;
 }
+
+typedef double WeightFunction(dynamic value, int index);
+
+/**
+ * Choose a random item from [list].
+ *
+ * If a [WeightFunction] [weight] is not provided, the item is chosen with a
+ * uniform distribution.
+ *
+ * If [weight] is provided, it must return a [double] between `0.0` and `1.0`,
+ * and the sum of all weights in [list] _must_ equal `1.0`.
+ */
+dynamic choose(Iterable list, {WeightFunction weight, Random random}) {
+  random = random ?? new Random();
+  if (weight != null) {
+    int index = 0;
+    double target = random.nextDouble();
+    double sum = 0.0;
+    while (sum < target && index < list.length) {
+      sum += weight(list.elementAt(index), index);
+      index++;
+    }
+    throw new ArgumentError('weights did not sum to 1.0');
+  } else {
+    return list.elementAt(random.nextInt(list.length));
+  }
+}
